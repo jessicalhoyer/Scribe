@@ -127,7 +127,7 @@ public class HomeController {
 		User user = us.findByUsername(username);
 		if (user != null && password.equals(user.getPassword())) {
 			session.setAttribute("currentUser", user);
-			return "redirect:/directory";
+			return "redirect:/doc";
 		}
 		model.addAttribute("loginFailed", "Login failed, please try again.");
 		return "login";
@@ -229,6 +229,15 @@ public class HomeController {
 	
 	/* ===== DOC METHODS ==== */
 	
+	// show doc page
+		@GetMapping("/doc")
+		public String showDoc(Model model, HttpSession session){		
+			User user = (User) session.getAttribute("currentUser");
+			List<Folder> folderList = fs.listAllFolders(user.getId());				
+			model.addAttribute("folderList", folderList);
+			return "doc";
+		}
+	
 	// show doc page aka view mode
 	// folders not included because they only contain a title which is already displayed
 	// in the organizer
@@ -315,7 +324,7 @@ public class HomeController {
 
 			fs.editFolder(title, Integer.parseInt(id));
 			model.addAttribute("folderEdit", "true");
-			return "redirect:/directory";
+			return "redirect:/doc";
 		}
 		else {
 			Folder folder = fs.findById(Integer.parseInt(id));
@@ -354,7 +363,7 @@ public class HomeController {
 		
 		ds.deleteDocument(id);
 		model.addAttribute("docDeleteSuccess", "Document deleted successfully");
-		return "redirect:/directory";
+		return "redirect:/doc";
 	}
 	
 	// show delete-folder page
@@ -378,7 +387,7 @@ public class HomeController {
 		
 		fs.deleteFolder(id);
 		model.addAttribute("folderDelete", "true");
-		return "redirect:/directory";
+		return "redirect:/doc";
 	}
 	
 	/* ===== CREATE METHODS ==== */
@@ -407,7 +416,7 @@ public class HomeController {
 			model.addAttribute("folderList", folderList);
 			fs.saveFolder(folder);
 			model.addAttribute("folderCreate", "true");
-			return "redirect:/directory";
+			return "redirect:/doc";
 			
 		}
 	}
@@ -447,7 +456,7 @@ public class HomeController {
 		else {
 			ds.saveDocument(doc);
 			model.addAttribute("docCreate", "true");
-			return "redirect:/directory";
+			return "redirect:/doc";
 		}
 		
 	}
