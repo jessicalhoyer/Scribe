@@ -29,7 +29,7 @@
 				<li><p class="title">Scribe</p></li>
 				<li>Welcome ${currentUser.username}</li>
 				<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
-				<li><a href="${pageContext.request.contextPath}/directory">Directory</a></li>
+				<li><a href="${pageContext.request.contextPath}/doc">Directory</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 			</ul>
 		</nav>
@@ -47,7 +47,7 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/create-folder">Create Folder</a></li>
 				<li><a href="${pageContext.request.contextPath}/create-doc">Create Document</a></li>
-				<li><a href="${pageContext.request.contextPath}/edit-doc/${currentDoc.id}">Edit Mode</a></li>
+				<li><a href="${pageContext.request.contextPath}/edit">Edit Mode</a></li>
 			</ul>
 		</div>
 		
@@ -60,14 +60,17 @@
 	        <!-- start organizer section -->
 	        
 	        <section class="organizer">
-		        <c:forEach items="${folderList}" var="folder">
-		        <p class="folder">${folder.title}</p>
-		        	
-		        	<c:forEach items="${folder.documents}" var="doc">
-			        <p class="doc"><a href="${doc.id}">${doc.title}</a></p>
+	        	<c:if test="${empty folderList}">
+	        		<p>Nothing to display.</p>
+	        	</c:if>
+	        	<c:if test="${!empty folderList}">
+			        <c:forEach items="${folderList}" var="folder">
+			        <p class="folder">${folder.title}</p>
+			        	<c:forEach items="${folder.documents}" var="doc">
+				        <p class="doc"><a href="${pageContext.request.contextPath}/doc/${doc.id}">${doc.title}</a></p>
+				        </c:forEach>
 			        </c:forEach>
-		        
-		        </c:forEach>
+		        </c:if>
 	        </section>
 	        
 	        <!-- end organizer section -->
@@ -76,9 +79,14 @@
 	        
 	        <section class="body">
 	        
-	        <h2>${currentDoc.title}</h2>
-	        
-	        <p>${currentDoc.content}</p>
+	        <c:if test="${empty currentDoc}">
+	        	<h2>Welcome ${currentUser.username}! Please select a document to view</h2>
+	        </c:if>
+	        <c:if test="${!empty currentDoc}">
+		        <h2>${currentDoc.title}</h2>
+		        
+		        <p>${currentDoc.content}</p>
+	        </c:if>
 
 	        </section>
 	        

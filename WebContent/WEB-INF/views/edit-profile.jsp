@@ -28,7 +28,7 @@
 				<li><p class="title">Scribe</p></li>
 				<li>Welcome ${currentUser.username}</li>
 				<li><a href="profile">Profile</a></li>
-				<li><a href="directory">Directory</a></li>
+				<li><a href="doc">Directory</a></li>
 				<li><a href="logout">Logout</a></li>
 			</ul>
 		</nav>

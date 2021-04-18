@@ -229,16 +229,16 @@ public class HomeController {
 	
 	/* ===== DOC METHODS ==== */
 	
-	// show doc page
-		@GetMapping("/doc")
-		public String showDoc(Model model, HttpSession session){		
-			User user = (User) session.getAttribute("currentUser");
-			List<Folder> folderList = fs.listAllFolders(user.getId());				
-			model.addAttribute("folderList", folderList);
-			return "doc";
-		}
+	// show doc page for view mode
+	@GetMapping("/doc")
+	public String showDoc(Model model, HttpSession session) {		
+		User user = (User) session.getAttribute("currentUser");
+		List<Folder> folderList = fs.listAllFolders(user.getId());				
+		model.addAttribute("folderList", folderList);
+		return "doc";
+	}
 	
-	// show doc page aka view mode
+	// show doc page
 	// folders not included because they only contain a title which is already displayed
 	// in the organizer
 	@GetMapping("/doc/{id}")
@@ -255,6 +255,15 @@ public class HomeController {
 	}
 	
 	/* ===== EDIT METHODS ==== */
+	
+	// show edit page for edit mode
+	@GetMapping("/edit")
+	public String showEdit(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("currentUser");
+		List<Folder> folderList = fs.listAllFolders(user.getId());
+		model.addAttribute("folderList", folderList);
+		return "edit";
+	}
 	
 	// show edit-doc page aka edit mode
 	@GetMapping("/edit-doc/{id}")

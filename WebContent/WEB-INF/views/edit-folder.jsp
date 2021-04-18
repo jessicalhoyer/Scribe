@@ -30,7 +30,7 @@
 				<li><p class="title">Scribe</p></li>
 				<li>Welcome ${currentUser.username}</li>
 				<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
-				<li><a href="${pageContext.request.contextPath}/directory">Directory</a></li>
+				<li><a href="${pageContext.request.contextPath}/doc">Directory</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 			</ul>
 		</nav>
@@ -48,7 +48,7 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/create-folder">Create Folder</a></li>
 				<li><a href="${pageContext.request.contextPath}/create-doc">Create Document</a></li>
-				<li><a href="${pageContext.request.contextPath}/directory">Directory</a></li>
+				<li><a href="${pageContext.request.contextPath}/doc">View Mode</a></li>
 			</ul>
 		</div>
 		

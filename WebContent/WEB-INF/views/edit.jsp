@@ -2,7 +2,6 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        <title>Scribe | Create Folder</title>
+        <title>Scribe | Directory</title>
 
         <!-- stylesheet -->
         <spring:url value="/resources/css/main.css" var="mainCss"/>
@@ -24,7 +23,6 @@
 <body>
 
 	<!-- start header -->
-
 	<header>
 		<nav>
 			<ul>
@@ -36,10 +34,10 @@
 			</ul>
 		</nav>
 	</header>
-	
-	<!-- end header -->
-	
-	<!-- start wrapper -->
+        
+ 	<!-- end header -->
+ 	
+ 	<!-- start wrapper -->
 
 	<div id="wrapper">
 	
@@ -47,8 +45,9 @@
         
 		<div id="controlnav">
 			<ul>
+				<li><a href="${pageContext.request.contextPath}/create-folder">Create Folder</a></li>
 				<li><a href="${pageContext.request.contextPath}/create-doc">Create Document</a></li>
-				<li><a href="${pageContext.request.contextPath}/directory">Directory</a></li>
+				<li><a href="${pageContext.request.contextPath}/doc">View Mode</a></li>
 			</ul>
 		</div>
 		
@@ -58,46 +57,51 @@
         
         <div class="flex-container">
         
-        <!-- start body section -->
-        
-        <section class="body">
-        
-        <h2>Create New Folder</h2>
-        
-        	<!-- start form -->
-        
-	        <form:form action="./create-folder" method="post" modelAttribute="newFolder">
+	        <!-- start organizer section -->
 	        
-	       		<div class="line">
-		        	<label for="title">Title</label>
-		        	<form:input path="title" style="border:1px solid black;"/>
-	        	</div>
+	        <section class="organizer">
+	        	<c:if test="${empty folderList}">
+	        		<p>Nothing to display.</p>
+	        	</c:if>
+	        	<c:if test="${!empty folderList}">
+			        <c:forEach items="${folderList}" var="folder">
+			        <p class="folder edit"><a href="${pageContext.request.contextPath}/edit-folder/${folder.id}">${folder.title}</a></p>
+			        	<c:forEach items="${folder.documents}" var="doc">
+				        <p class="doc"><a href="${pageContext.request.contextPath}/doc/${doc.id}">${doc.title}</a></p>
+				        </c:forEach>
+			        </c:forEach>
+		        </c:if>
+	        </section>
 	        
-	        	<div class="line">
-	        		<input type="submit" value="Create" name="submit" id="submit"/>
-	       		</div>
+	        <!-- end organizer section -->
 	        
-	        	<!-- validation checks below -->
-	        	<p><form:errors path="title"/></p>
+	        <!-- start body section -->
 	        
-	        </form:form>
+	        <section class="body">
 	        
-	        <!-- end form -->
+	        <c:if test="${empty currentDoc}">
+	        	<h2>Welcome ${currentUser.username}! Please select a document to edit</h2>
+	        </c:if>
+	        <c:if test="${!empty currentDoc}">
+		        <h2>${currentDoc.title}</h2>
+		        
+		        <p>${currentDoc.content}</p>
+	        </c:if>
 
-        </section>
-        
-        <!-- end body section -->
+	        </section>
+	        
+	        <!-- end body section -->
         
         </div>
         
         <!-- end flex container -->
 
-        </div>
-        
-        <!-- end wrapper -->
+	</div>
 	
-	<!-- start footer -->
+	<!-- end wrapper -->
 
+	<!-- start footer -->
+	
 	<footer>
 		<p class="center">Scribe &copy; Jessica Hoyer 2021</p>
 	</footer>
