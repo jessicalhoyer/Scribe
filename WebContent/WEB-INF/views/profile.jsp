@@ -48,6 +48,8 @@
 		<h2>${currentUser.username}'s Profile</h2>
 
 		<p><b>Username:</b> ${currentUser.username}</p>
+		
+		<p><b>Document Sort:</b> sort order goes here</p>
             
             <div class="line">
             	<a href="edit-profile" class="button">Edit Profile</a>

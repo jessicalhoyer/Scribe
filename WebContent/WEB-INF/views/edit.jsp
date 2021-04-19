@@ -67,7 +67,7 @@
 			        <c:forEach items="${folderList}" var="folder">
 			        <p class="folder edit"><a href="${pageContext.request.contextPath}/edit-folder/${folder.id}">${folder.title}</a></p>
 			        	<c:forEach items="${folder.documents}" var="doc">
-				        <p class="doc"><a href="${pageContext.request.contextPath}/doc/${doc.id}">${doc.title}</a></p>
+				        <p class="doc"><a href="${pageContext.request.contextPath}/edit-doc/${doc.id}">${doc.title}</a></p>
 				        </c:forEach>
 			        </c:forEach>
 		        </c:if>

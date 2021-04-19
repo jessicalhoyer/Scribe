@@ -48,6 +48,8 @@
         
         	<p>Change your username and password here. If you don't want to change your password, just enter and confirm your current password.</p>
         	
+        	<p>You can also change the sort order of your documents from here. By ID is the default sort order.</p>
+        	
         	<!-- start form -->
 
             <form class="center" action="./edit-profile" method="post">
@@ -58,12 +60,20 @@
             	</div>
             	
             	<div class="line">
-	            	<label for="password">Password</label>
+		        	<label for="sort">Change Document Sort</label>
+		        		<select name="sort">
+		        			<option value="sortById">By Id (Default)</option>
+		        			<option value="sortAlpha">Alphabetically</option>
+		        		</select>
+		        </div>
+            	
+            	<div class="line">
+	            	<label for="password">New Password</label>
 	            	<input type="password" name="password"/>
             	</div>
             	
             	<div class="line">
-	            	<label for="c-password">Confirm Password</label>
+	            	<label for="c-password">Confirm New Password</label>
 	            	<input type="password" name="c-password"/>
             	</div>
             	
