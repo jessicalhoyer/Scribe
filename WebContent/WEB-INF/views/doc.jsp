@@ -47,7 +47,7 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/create-folder">Create Folder</a></li>
 				<li><a href="${pageContext.request.contextPath}/create-doc">Create Document</a></li>
-				<li><a href="${pageContext.request.contextPath}/edit">Edit Mode</a></li>
+				<li><a href="${pageContext.request.contextPath}/edit-doc/${currentDoc.id}">Edit Mode</a></li>
 			</ul>
 		</div>
 		
